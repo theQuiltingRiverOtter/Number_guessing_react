@@ -37,7 +37,7 @@ function App() {
       <h2>Attempts</h2>
       <ul>
         {attempts.map((attempt, idx) => {
-          return (<li>{attempt}</li>)
+          return (<li key={idx}>{attempt}</li>)
         })}
       </ul>
     </>
