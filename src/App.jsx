@@ -3,9 +3,9 @@ import './App.css'
 import Form from "./Form.jsx"
 import Message from "./Message.jsx"
 
-const answer = Math.floor(Math.random() * 100) + 1;
-function App() {
 
+function App() {
+  const [answer, setAnswer] = useState(Math.floor(Math.random() * 100) + 1)
   const [attempts, setAttempts] = useState([])
   const [win, setWin] = useState(false);
   const [lower, setLower] = useState(0)
@@ -25,6 +25,14 @@ function App() {
         setLower(guess)
       }
     }
+    e.target[0].value = '';
+  }
+  const playAgain = () => {
+    setAnswer(Math.floor(Math.random() * 100) + 1);
+    setAttempts([]);
+    setWin(false);
+    setLower(0);
+    setHigher(101);
   }
 
   return (
@@ -34,6 +42,7 @@ function App() {
       {attempts.length >= 7 && <p>Sorry, too many guesses. The answer was {answer}</p>}
       <Message lower_index={lower} higher_index={higher} />
       {win && <p>You got it, the answer was {answer}</p>}
+      {(win || attempts.length >= 7) && <button onClick={playAgain}>Play Again</button>}
       <h2>Attempts</h2>
       <ul>
         {attempts.map((attempt, idx) => {
